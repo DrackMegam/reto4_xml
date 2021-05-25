@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Laura Álvarez
  */
 @XmlRootElement
-public class Persona {
+public class Empleado {
     private String nombre;
     private String apellidoPrimero;
     private String apellidoSegundo;
@@ -21,7 +21,7 @@ public class Persona {
     private String domicilio;
     private int telefono;
 
-    public Persona(String nombre, String apellidoPrimero, String apellidoSegundo, String fechaNacimiento, String domicilio, int telefono) {
+    public Empleado(String nombre, String apellidoPrimero, String apellidoSegundo, String fechaNacimiento, String domicilio, int telefono) {
         this.nombre = nombre;
         this.apellidoPrimero = apellidoPrimero;
         this.apellidoSegundo = apellidoSegundo;
@@ -30,7 +30,7 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public Persona() {
+    public Empleado() {
         this.nombre = "";
         this.apellidoPrimero = "";
         this.apellidoSegundo = "";

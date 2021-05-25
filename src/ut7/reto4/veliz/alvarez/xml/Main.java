@@ -52,21 +52,21 @@ public class Main {
     private static void escribirXML() {
         try {
             // Creación del objeto persona.
-            Persona objetoPersona = crearPersona();
+            Empleado objetoEmpleado = crearEmpleado();
 
-            File archivo = new File(objetoPersona.getNombre()
-                    +objetoPersona.getApellidoPrimero()
-                    +objetoPersona.getApellidoSegundo()+".xml");
+            File archivo = new File(objetoEmpleado.getNombre()
+                    +objetoEmpleado.getApellidoPrimero()
+                    +objetoEmpleado.getApellidoSegundo()+".xml");
             // Flujo de salida y transformador a XML.
             XMLStreamWriter escribirXML = XMLOutputFactory.newFactory()
                     .createXMLStreamWriter(new BufferedOutputStream(new FileOutputStream(archivo)), "UTF-8");
-            JAXBContext jaxbC = JAXBContext.newInstance(Persona.class);
+            JAXBContext jaxbC = JAXBContext.newInstance(Empleado.class);
             Marshaller transformador = jaxbC.createMarshaller();
             transformador.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
                     true);
 
             // Transformo el objeto a XML y flusheo para cerrar datos.
-            transformador.marshal(objetoPersona, escribirXML);
+            transformador.marshal(objetoEmpleado, escribirXML);
             escribirXML.flush();
             escribirXML.close();
         } catch (FileNotFoundException | JAXBException | XMLStreamException e) {
@@ -76,7 +76,7 @@ public class Main {
 
     private static void leerXML() {
         // Objeto persona y selector de archivos XML.
-        Persona objetoPersona = null;
+        Empleado objetoEmpleado = null;
         String nombreArchivo;
         Scanner scan = new Scanner(System.in);
         System.out.println("Nombre del archivo XML (sin extensión)");
@@ -91,23 +91,23 @@ public class Main {
             // Flujo y transformador
             XMLStreamReader leerXML = XMLInputFactory.newFactory()
                     .createXMLStreamReader(new BufferedInputStream(new FileInputStream(archivo)), "UTF-8");
-            JAXBContext jaxbC = JAXBContext.newInstance(Persona.class);
+            JAXBContext jaxbC = JAXBContext.newInstance(Empleado.class);
             Unmarshaller transformador = jaxbC.createUnmarshaller();
 
             // Añado datos al objeto desde el XML.
-            objetoPersona = (Persona) transformador.unmarshal(leerXML);
+            objetoEmpleado = (Empleado) transformador.unmarshal(leerXML);
             leerXML.close();
 
         } catch (IOException | XMLStreamException | JAXBException ex) {
             System.out.println("Error: " + ex.getLocalizedMessage());
         }
 
-        if (objetoPersona != null) {
-            System.out.println(objetoPersona.toString());
+        if (objetoEmpleado != null) {
+            System.out.println(objetoEmpleado.toString());
         }
     }
 
-    private static Persona crearPersona() {
+    private static Empleado crearEmpleado() {
         Scanner scan= new Scanner(System.in);
         String opcion;
         String nombre, apellido1, apellido2, domicilio,fechaNac;
@@ -156,7 +156,7 @@ public class Main {
         numero=Integer.parseInt(opcion);
         opcion=null;
 
-        return new Persona(nombre,apellido1,apellido2,fechaNac,domicilio,numero);
+        return new Empleado(nombre,apellido1,apellido2,fechaNac,domicilio,numero);
     }
 
 }
